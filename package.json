@@ -1,0 +1,27 @@
+{
+  "name": "tslearn",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "ts-node": "ts-node",
+    "dev": "npm run --silent ts-node"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asumaran/tslearn.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/asumaran/tslearn/issues"
+  },
+  "homepage": "https://github.com/asumaran/tslearn#readme",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^22.15.15",
+    "ts-node": "^10.9.2",
+    "tslib": "^2.8.1",
+    "typescript": "^5.8.3"
+  }
+}
