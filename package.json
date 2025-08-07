@@ -4,8 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "ts-node": "ts-node",
-    "dev": "npm run --silent ts-node"
+    "dev": "tsx",
+    "dev:watch": "tsx watch"
   },
   "repository": {
     "type": "git",
@@ -20,8 +20,8 @@
   "description": "",
   "devDependencies": {
     "@types/node": "^22.15.15",
-    "ts-node": "^10.9.2",
     "tslib": "^2.8.1",
+    "tsx": "^4.20.3",
     "typescript": "^5.8.3"
   }
 }
