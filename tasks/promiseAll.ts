@@ -27,6 +27,10 @@ export default function promiseAll<T extends readonly unknown[] | []>(
       // se resuelve y comparar ese contador con `iterable.length`.
       try {
         const result = await p;
+        // otro punto importante es que el resultado se debe asignar a la posicion correcta
+        // ya que dado que las condiciones pueden resolverse en cualquier orden
+        // asi que con esto nos asegurammos que asignamos el resultado del resultado
+        // de la promesa en el correcto orden.
         resolvedPromises[i] = result;
         resolvedCounter++;
         if (resolvedCounter === iterable.length) {
