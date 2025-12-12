@@ -2,22 +2,46 @@ export default function mostCommonElements(
   numbers: number[],
   k: number
 ): number[] {
-  // Map de frecuencia con tipos explícitos
-  const m = new Map<number, number>();
+  // apporach con buckets.
+  const frequencyMap: Map<number, number> = new Map();
 
-  for (let i = 0; i < numbers.length; i++) {
-    const n = numbers[i];
-    m.set(n, (m.get(n) || 0) + 1);
+  numbers.forEach((n) => {
+    frequencyMap.set(n, (frequencyMap.get(n) || 0) + 1);
+  });
+
+  // console.log(frequencyMap);
+
+  // +1 porque la frecuencia no es 0-based
+  const buckets: number[][] = new Array(numbers.length + 1)
+    .fill(null)
+    .map(() => []);
+  // console.log({ heap });
+
+  for (const [num, frequency] of frequencyMap) {
+    // console.log({ x, y });
+    buckets[frequency].push(num);
   }
 
-  // Convertir entradas a array [value, count], ordenar por count descendente
-  const sorted = Array.from(m.entries())
-    .sort((a, b) => b[1] - a[1])
-    .map(([value]) => value);
+  // console.log(heap);
 
-  return sorted.slice(0, k);
+  // ahora necesitamos obtener lo k primeros items, como es los mas frecuentes
+  // empezamos a iterar desde el más alto
+  const result: number[] = [];
+  for (let i = numbers.length; i >= 0 && k > 0; i--) {
+    // console.log({ i });
+    if (buckets[i].length > 0) {
+      for (const num of buckets[i]) {
+        // console.log('xxxx', x);
+        result.push(num);
+        k--;
+        if (k === 0) {
+          return result;
+        }
+      }
+    }
+  }
+
+  return result;
 }
 
-// 5,5,2,4,1,5] k = 1
-
-console.log(mostCommonElements([4, 4, 4, 6, 6, 5, 5, 5], 2));
+console.log(mostCommonElements([1, 1, 1, 1, 2, 3, 3], 2));
