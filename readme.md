@@ -1,6 +1,8 @@
-### Thoughts on TypeScript code
+### JS/TS practice
 
-Here I'll be taking some notes on things of interest to me about TypeScript.
+A scratchpad for solving JavaScript and TypeScript exercises from different
+sources: interview questions, coding challenges and anything else worth
+practicing. Each exercise lives in its own file under `tasks/`.
 
 ### Run a file once:
 ```bash
