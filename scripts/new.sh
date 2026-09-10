@@ -23,24 +23,36 @@ fi
 file="tasks/$name.ts"
 
 if [ -e "$file" ]; then
-  echo "using existing $file"
-else
-  mkdir -p tasks
-  if [[ "$name" =~ ^[A-Za-z_$][A-Za-z0-9_$]*$ ]]; then
-    cat >"$file" <<EOF
+  # Suggest the next free numeric suffix (foo -> foo2, foo3, ...), matching
+  # the existing classnames.ts / classnames2.ts convention.
+  base="$name"
+  n=2
+  while [ -e "tasks/$base$n.ts" ]; do
+    n=$((n + 1))
+  done
+  suggested="$base$n"
+  read -rp "$file already exists. Create tasks/$suggested.ts instead? [Y/n] " answer
+  case "${answer:-y}" in
+    [Yy]*) name="$suggested"; file="tasks/$name.ts" ;;
+    *) echo "aborted"; exit 1 ;;
+  esac
+fi
+
+mkdir -p tasks
+if [[ "$name" =~ ^[A-Za-z_$][A-Za-z0-9_$]*$ ]]; then
+  cat >"$file" <<EOF
 export default function $name() {}
 
 console.log($name());
 EOF
-  else
-    cat >"$file" <<EOF
+else
+  cat >"$file" <<EOF
 export {};
 
 console.log('$name');
 EOF
-  fi
-  echo "created $file"
 fi
+echo "created $file"
 
 watch_pane=""
 if [ "${HERDR_ENV:-}" = 1 ] && command -v herdr >/dev/null 2>&1; then

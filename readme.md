@@ -17,5 +17,6 @@ npm run dev:watch tasks/promiseAll.ts
 npm run new myTask
 ```
 
-Creates `tasks/myTask.ts` (if missing) and opens it in `nvim`.
+Creates `tasks/myTask.ts` and opens it in `nvim`. If the file already exists,
+it offers to create the next free name instead (`myTask2.ts`, `myTask3.ts`, ...).
 Inside herdr, `dev:watch` runs in a sibling pane that closes when the editor exits.
